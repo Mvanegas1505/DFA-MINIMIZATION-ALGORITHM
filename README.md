@@ -152,7 +152,7 @@ cd repository-name
 
 ### 2. Run the Program
 ```
-python3 minimizer.py input.txt
+python3 main.py 
 ```
 
 ---
