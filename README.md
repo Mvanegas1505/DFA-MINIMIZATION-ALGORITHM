@@ -10,12 +10,11 @@ The algorithm applies **state equivalence** theory, focusing on pairs of states 
 ## Theoretical Background
 ### Deterministic Finite Automaton (DFA)
 A DFA is defined as a 5-tuple:
-- **Q**: Finite set of states
-- **Σ**: Finite set of input symbols (alphabet)
-- **δ**: Transition function \( \delta : Q \times \Sigma \rightarrow Q \)
-- **s**: Initial state \( s \in Q \)
-- **F**: Set of final (accepting) states \( F \subseteq Q \)
-
+*   **Q:** Finite set of states.
+*   **Σ (Sigma):** Finite set of input symbols (alphabet).
+*   **δ (Delta):** Transition function (δ: Q × Σ → Q). This means δ takes a state from Q and an input symbol from Σ and returns a new state in Q.
+*   **s:** Initial state (s in Q).
+*   **F:** Set of final (accepting) states (F is a subset of Q).
 ### Preliminaries
 
 For this assignment, some definitions and notions are required. Let M = (Q, Σ, δ, s, F) be a deterministic finite automaton (DFA).
