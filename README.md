@@ -41,12 +41,14 @@ Kozen, Dexter C. Automata and Computability. Springer, 1997. [DOI: 10.1007/978-1
 ## Input/Output Specification
 ### Input Format
 The program accepts multiple DFA cases as input. Each case includes:
-1. Number of states \( n \).
-2. Alphabet symbols separated by spaces.
-3. List of final states.
-4. Transition table with \( n \) rows, each specifying state transitions for each symbol in the alphabet.
 
-NOTE: The Transition Table has *n* lines, one for each state. Each line contains a row of the table that represents *M*. Assume that the symbols of the alphabet appear in the table in the same order as they were given in step 2. If the automaton is represented by the following table:
+1. A number c > 0 indicating how many cases you will receive.
+2.  Number of states \( n \).
+3. Alphabet symbols separated by spaces.
+4. List of final states.
+5. Transition table with \( n \) rows, each specifying state transitions for each symbol in the alphabet.
+
+NOTE: The Transition Table has *n* lines, one for each state. Each line contains a row of the table that represents *M*. Assume that the symbols of the alphabet appear in the table in the same order as they were given in step 3. If the automaton is represented by the following table:
 
 | State | a | b |
 |---|---|---|
