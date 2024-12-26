@@ -105,7 +105,7 @@ The program has two main components:
 1. **find_equivalent_states** - Implements the minimization algorithm by partitioning states into groups and refining them based on transitions.
 2. **read_automaton_from_file** - Parses DFA specifications from a file.
 
-### Example Usage
+### Example Usage for reading input.txt file
 ```python
 def read_automaton_from_file(file_path):
     # Open the file and read its lines
