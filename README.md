@@ -60,12 +60,14 @@ NOTE: The Transition Table has *n* lines, one for each state. Each line contains
 | 5F | 5 | 5 |
 
  The n lines are
+ ```
  0 1 2
  1 3 4
  2 4 3
  3 5 5
  4 5 5
  5 5 5
+ ```
 
 **Explanation of the table format:**
 
