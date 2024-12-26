@@ -17,13 +17,18 @@ A DFA is defined as a 5-tuple:
 - **F**: Set of final (accepting) states \( F \subseteq Q \)
 
 ### Preliminaries
-1. **Inaccessible States**: A state \( q \in Q \) is said to be inaccessible if there is no string \( x \in \Sigma^* \) such that \( \hat{\delta}(s, x) = q \).
-2. **Equivalent States**: A pair of states \( p, q \in Q \) is said to be equivalent if and only if:
-\[
-(\forall x \in \Sigma^*)(\hat{\delta}(p, x) \in F \iff \hat{\delta}(q, x) \in F)
-\]
-That is, any string \( x \) that allows access to a final state from \( p \) must also allow access to a final state from \( q \), and vice versa.
-3. **Collapsible States**: Two states can be collapsed if they are equivalent.
+
+For this assignment, some definitions and notions are required. Let M = (Q, Σ, δ, s, F) be a deterministic finite automaton (DFA).
+
+1.  **Inaccessible States:** A state *q* in *Q* is said to be inaccessible if there is no string *x* in Σ* (Sigma star, meaning zero or more symbols from Σ) such that δ-hat(*s*, *x*) = *q*.
+
+    *   δ-hat represents the extended transition function, which describes the effect of a sequence of inputs.
+
+2.  **Equivalent States:** A pair of states *p*, *q* in *Q* is said to be equivalent if and only if for all strings *x* in Σ*, δ-hat(*p*, *x*) is in *F* if and only if δ-hat(*q*, *x*) is in *F*.
+
+    *   In simpler terms: If starting from state *p* and processing any string *x* leads to a final state (a state in *F*), then starting from state *q* and processing the *same* string *x* *must also* lead to a final state, and vice-versa.
+
+3.  **Collapsible States:** Two states can be collapsed (merged) if they are equivalent.
 
 ### Algorithm Reference
 The minimization algorithm implemented in this project is based on Dexter Kozen's **Automata and Computability** (1997). The algorithm iteratively partitions states into groups based on their transition behavior, refining these groups until no further splits are possible.
@@ -148,12 +153,7 @@ a b
 
 ---
 
-## Contributors
-- [Contributor 1]
-- [Contributor 2]
-- [Contributor 3]
-- [Contributor 4]
-- [Contributor 5]
-
----
+## Developers
+- [Valentina Castro Pineda]
+- [Martin Vanegas Ospina]
 Thank you for contributing to this project!
