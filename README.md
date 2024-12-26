@@ -23,11 +23,12 @@ For this assignment, some definitions and notions are required. Let M = (Q, Σ, 
 
     *   δ-hat represents the extended transition function, which describes the effect of a sequence of inputs.
 
-2.  **Equivalent States:** A pair of states *p*, *q* in *Q* is said to be equivalent if and only if for all strings *x* in Σ*, δ-hat(*p*, *x*) is in *F* if and only if δ-hat(*q*, *x*) is in *F*.
+2.  **Equivalent States:** A pair of states *p*, *q* in *Q* is said to be equivalent if and only if for all strings *x* in Σ*, δ-hat(*p*, *x*) is in *F*
+3.  if and only if δ-hat(*q*, *x*) is in *F* as well.
 
     *   In simpler terms: If starting from state *p* and processing any string *x* leads to a final state (a state in *F*), then starting from state *q* and processing the *same* string *x* *must also* lead to a final state, and vice-versa.
 
-3.  **Collapsible States:** Two states can be collapsed (merged) if they are equivalent.
+4.  **Collapsible States:** Two states can be collapsed (merged) if they are equivalent.
 
 ### Algorithm Reference
 The minimization algorithm implemented in this project is based on Dexter Kozen's **Automata and Computability** (1997). The algorithm iteratively partitions states into groups based on their transition behavior, refining these groups until no further splits are possible.
@@ -44,6 +45,31 @@ The program accepts multiple DFA cases as input. Each case includes:
 2. Alphabet symbols separated by spaces.
 3. List of final states.
 4. Transition table with \( n \) rows, each specifying state transitions for each symbol in the alphabet.
+
+NOTE: The Transition Table has *n* lines, one for each state. Each line contains a row of the table that represents *M*. Assume that the symbols of the alphabet appear in the table in the same order as they were given in step 2. If the automaton is represented by the following table:
+
+| State | a | b |
+|---|---|---|
+| →0 | 1 | 2 |
+| 1F | 3 | 4 |
+| 2 | 4 | 5 |
+| 3 | 5 | 5 |
+| 4F | 5 | 5 |
+| 5F | 5 | 5 |
+
+ The n lines are
+ 0 1 2
+ 1 3 4
+ 2 4 3
+ 3 5 5
+ 4 5 5
+ 5 5 5
+
+**Explanation of the table format:**
+
+*   **State:** The current state. The arrow (→) indicates the initial state (0 in this case). The "F" indicates a final/accepting state (1, 4, and 5 in this case).
+*   **a/b:** The input symbols of the alphabet.
+*   The entries in the table indicate the next state reached upon reading the corresponding input symbol from the current state. For example, if the automaton is in state 0 and reads an "a", it transitions to state 1.
 
 **Example Input:**
 ```
@@ -77,41 +103,38 @@ The program has two main components:
 
 ### Example Usage
 ```python
-def find_equivalent_states(automaton):
-    alphabet = automaton[0] 
-    final_states = set(automaton[1]) 
-    transitions = automaton[2:] 
-    num_states = len(transitions)
-    groups = [final_states, set(range(num_states)) - final_states]
+def read_automaton_from_file(file_path):
+    # Open the file and read its lines
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
 
-    while True:
-        new_groups = []
-        for group in groups:
-            partition = {}
-            for state in group:
-                signature = tuple(
-                    tuple(find_group(transitions[state][symbol_idx + 1], groups)) 
-                    for symbol_idx in range(len(alphabet))
-                )
-                if signature in partition:
-                    partition[signature].append(state)
-                else:
-                    partition[signature] = [state]
-            new_groups.extend(partition.values())
-        if new_groups == groups:
-            break
-        groups = new_groups
+    # Read the number of automata from the first line
+    num_automata = int(lines[0].strip())
+    automata = []
 
-    equivalent_states = [group for group in groups if len(group) > 1]
-    pairs = []
-    for group in equivalent_states:
-        sorted_group = sorted(group)
-        for i in range(len(sorted_group)):
-            for j in range(i + 1, len(sorted_group)):
-                pairs.append((sorted_group[i], sorted_group[j]))
-    pairs.sort()
-    print(" ".join(f"({a},{b})" for a, b in pairs))
+    index = 1
+    for _ in range(num_automata):
+        # Read the number of states for the current automaton
+        num_states = int(lines[index].strip())
 
+        # Read the alphabet for the current automaton
+        alphabet = lines[index + 1].strip().split()
+
+        # Read the final states for the current automaton
+        final_states = list(map(int, lines[index + 2].strip().split()))
+
+        # Read the transition table for the current automaton
+        transitions = []
+        for i in range(num_states):
+            transitions.append(list(map(int, lines[index + 3 + i].strip().split())))
+
+        # Append the current automaton to the list of automata
+        automata.append([alphabet, final_states] + transitions)
+
+        # Move the index to the next automaton
+        index += (3 + num_states)
+
+    return automata
 ```
 
 ---
