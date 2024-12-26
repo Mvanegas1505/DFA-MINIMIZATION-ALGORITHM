@@ -24,7 +24,7 @@ For this assignment, some definitions and notions are required. Let M = (Q, Σ, 
     *   δ-hat represents the extended transition function, which describes the effect of a sequence of inputs.
 
 2.  **Equivalent States:** A pair of states *p*, *q* in *Q* is said to be equivalent if and only if for all strings *x* in Σ*, δ-hat(*p*, *x*) is in *F*
-3.  if and only if δ-hat(*q*, *x*) is in *F* as well.
+    if and only if δ-hat(*q*, *x*) is in *F* as well.
 
     *   In simpler terms: If starting from state *p* and processing any string *x* leads to a final state (a state in *F*), then starting from state *q* and processing the *same* string *x* *must also* lead to a final state, and vice-versa.
 
