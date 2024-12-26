@@ -182,4 +182,4 @@ a b
 ## Developers
 - [Valentina Castro Pineda]
 - [Martin Vanegas Ospina]
-Thank you for contributing to this project!
+  
